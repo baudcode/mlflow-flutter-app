@@ -87,6 +87,7 @@ class ExperimentListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      dense: true,
       title: Text(
         experiment.name,
         maxLines: 1,
