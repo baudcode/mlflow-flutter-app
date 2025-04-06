@@ -92,18 +92,26 @@ class MetricFullscreenChart extends StatelessWidget {
       LineChartData(
         lineTouchData: LineTouchData(
           touchTooltipData: LineTouchTooltipData(
+            maxContentWidth: 300,
+            fitInsideVertically: true,
             tooltipBgColor: Theme.of(context).colorScheme.surface.withOpacity(0.8),
+            tooltipPadding: const EdgeInsets.all(8.0), // Increase padding for larger tooltip
+            tooltipRoundedRadius: 8.0, // Add rounded corners
+            tooltipMargin: 16.0, // Align tooltip closer to the bottom
             getTooltipItems: (List<LineBarSpot> touchedSpots) {
               return touchedSpots.map((spot) {
+                final spotIndex = touchedSpots.indexOf(spot);
                 final index = spot.barIndex;
                 final runId = metricData.runMetrics.keys.elementAt(index);
-                final runName = metricData.runNames[runId] ?? 'Unknown';
+                final runName = metricData.runNames[runId] ?? 'Unknown'; 
+                final text = '$runName\nValue: ${spot.y.toStringAsFixed(6)}' + ((spotIndex == touchedSpots.length - 1) ? "\nStep: ${spot.x.toInt()}\n" : "");
 
                 return LineTooltipItem(
-                  '$runName\nStep: ${spot.x.toInt()}\nValue: ${spot.y.toStringAsFixed(6)}',
+                  text,
                   TextStyle(
                     color: chartColors[index % chartColors.length],
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.bold, // Make text bold
+                    fontSize: 12, // Increase font size
                   ),
                 );
               }).toList();
