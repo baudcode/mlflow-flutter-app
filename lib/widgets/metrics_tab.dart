@@ -383,6 +383,7 @@ class MetricChart extends StatelessWidget {
             LineChartData(
               lineTouchData: LineTouchData(
                 touchTooltipData: LineTouchTooltipData(
+                  fitInsideVertically: true,
                   tooltipBgColor: Theme.of(context).colorScheme.surface.withOpacity(0.8),
                   getTooltipItems: (List<LineBarSpot> touchedSpots) {
                     return touchedSpots.map((spot) {
@@ -391,10 +392,11 @@ class MetricChart extends StatelessWidget {
                       final runName = metricData.runNames[runId] ?? 'Unknown';
 
                       return LineTooltipItem(
-                        '$runName\nStep: ${spot.x.toInt()}\nValue: ${spot.y.toStringAsFixed(6)}',
+                        '${spot.y.toStringAsFixed(6)}',
                         TextStyle(
                           color: chartColors[index % chartColors.length],
-                          fontWeight: FontWeight.bold,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 12
                         ),
                       );
                     }).toList();
