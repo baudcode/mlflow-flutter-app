@@ -193,7 +193,7 @@ class RunListItem extends StatelessWidget {
       color: isSelected ? Theme.of(context).colorScheme.primaryContainer : null,
       child: ListTile(
         title: Text(
-          run.info.runName,
+          (run.info.runName == "")? run.info.runId : run.info.runName,
           maxLines: 1,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
